@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+HELLO
+{% endblock %}
+
+{% block content %}
+<h1 class="text-center">HELLO HUSSAIN ARE YOU THERE</h1>
+<a class="btn btn-primary mb-4" href="{% url 'tweet_create' %}">Create a Tweet</a>
+
+<div class="container row gap-3">
+    {% for tweet in tweets %}
+    <div class="card" style="width: 18rem;">
+        {% if tweet.photo %}
+            <img src="{{ tweet.photo.url }}" class="card-img-top tweet-photo" alt="Tweet photo">
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ tweet.user.username }}</h5>
+          <p class="card-text">{{ tweet.text }}</p>
+          {% if user.is_authenticated and tweet.user == user %}
+          <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
+          <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

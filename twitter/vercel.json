@@ -1,0 +1,16 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "twitter/wgi.py",
+        "use": "@vercel/python",
+        "config":{"maxLambdaSize":"15mb","runtime":"python3.11.3"}
+      }],
+
+    "routes": [{
+
+        "src": "/(.*)",
+        "dest": "twitter/wgi.py"
+      }]
+  }
+  
